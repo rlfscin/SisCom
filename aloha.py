@@ -35,4 +35,4 @@ results = aloha(lowerBound)
 results = aloha(volt)
 
 for result in results:
-    print (result.toString())
+    print (result)
