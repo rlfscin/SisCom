@@ -23,7 +23,7 @@ def generator():
         
 def createTag():
     rand = lambda: random.choice(['0','1']) 
-    tagSize = 16
+    tagSize = 96
     tag = ''
     for i in range(tagSize):
         tag = tag + rand()
