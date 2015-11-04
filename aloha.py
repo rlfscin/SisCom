@@ -35,8 +35,5 @@ def lowerBound(x):
 def eomLee(x):
     return x*2 #TODO
 
-results = aloha(lowerBound)
+# results = aloha(lowerBound)
 #results = aloha(eomLee)
-
-for result in results:
-    print (result)
