@@ -1,5 +1,6 @@
 from Result import Result
 from random import randint
+from math import exp
 
 def aloha(func):
     rand = lambda x: randint(0,x)
@@ -13,30 +14,38 @@ def aloha(func):
 	        while(numTagsCount != 0):
 	            slots = [0]*numSlots
 	            numCollision = 0
+	            numEmpty = 0
+	            numSuccess = 0
 	            for tag in range(numTagsCount):
 	                slot = rand(numSlots-1)
 	                slots[slot] = slots[slot] + 1
 	            for slot in slots:
 	                if(slot == 0):
-	                    result.numEmpty = result.numEmpty + 1;
+	                	numEmpty = numEmpty + 1
 	                elif(slot == 1):
-	                    numTagsCount = numTagsCount - 1;
+	                	numSuccess = numSuccess + 1
 	                else:
 	                    numCollision = numCollision + 1
 	            result.numCollision = result.numCollision + numCollision
-	            numSlots = func(numCollision)
+	            result.numEmpty = result.numEmpty + numEmpty;
+	            numTagsCount = numTagsCount - numSuccess;
+	            numSlots = func({'collision' : numCollision, 'empty' : numEmpty, 'success' : numSuccess})
 	        resultTotal.add(result)
         results.append(resultTotal/1000)
     return results
 
-def lowerBound(x):
-    return x*2
 
-def eomLee(x):
-    return x*2 #TODO
+def lowerBound(result):
+    return result['collision']*2
 
-results = aloha(lowerBound)
-#results = aloha(eomLee)
-
-for result in results:
-    print (result)
+def eomLee(result):
+    b = float('inf')
+    y = 2.0
+    t = 0.001
+    l = result['collision'] + result['success'] + result['empty']
+    while True:
+    	b = l/(result['collision']*y + result['success'])
+    	ny = (1 - exp( -1 / b))/ b*(1 - (1 + 1/b)*exp(-1/b))
+    	if(abs(ny - y) > t):
+    		break
+    return int(y * result['collision'])
