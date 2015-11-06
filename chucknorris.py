@@ -37,4 +37,4 @@ giveMeTheGraphic([(x+1)*100 for x in range(10)], totalSlots, "Iteracoes", "Total
 giveMeTheGraphic([(x+1)*100 for x in range(10)], totalSlots2, "Iteracoes", "Total de Slots", 3)
 
 show()
-print "acabou"
+print "Acabou."
