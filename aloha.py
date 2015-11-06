@@ -29,6 +29,9 @@ def aloha(func):
 	            result.numCollision = result.numCollision + numCollision
 	            result.numEmpty = result.numEmpty + numEmpty;
 	            numTagsCount = numTagsCount - numSuccess;
+	            print "depois"
+	            total = numCollision + numSuccess + numEmpty
+	            print total
 	            numSlots = func({'collision' : numCollision, 'empty' : numEmpty, 'success' : numSuccess})
 	        resultTotal.add(result)
         results.append(resultTotal/1000)
@@ -45,8 +48,11 @@ def eomLee(result):
     l = result['collision'] + result['success'] + result['empty']
     while True:
     	b = l/(result['collision']*y + result['success'])
-    	ny = (1 - exp( -1 / b)) / b*(1 - (1 + 1/b)*exp(-1/b))
-    	if(abs(ny - y) > t):
+    	ny = (1 - exp( -1 / b)) / (b*(1 - (1 + 1/b)*exp(-1/b)))
+    	if(abs(y - ny) < t):
     		break
     	y = ny
+    print "antes"	
+    f = y * result['collision']
+    print f
     return int(y * result['collision'])
