@@ -45,7 +45,8 @@ def eomLee(result):
     l = result['collision'] + result['success'] + result['empty']
     while True:
     	b = l/(result['collision']*y + result['success'])
-    	ny = (1 - exp( -1 / b))/ b*(1 - (1 + 1/b)*exp(-1/b))
+    	ny = (1 - exp( -1 / b)) / b*(1 - (1 + 1/b)*exp(-1/b))
     	if(abs(ny - y) > t):
     		break
+    	y = ny
     return int(y * result['collision'])
