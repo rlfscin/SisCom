@@ -2,6 +2,8 @@ from Result import Result
 from random import randint
 from math import exp
 
+from scipy.misc import factorial
+
 def aloha(func):
     rand = lambda x: randint(0,x)
     results = []
@@ -56,3 +58,17 @@ def eomLee(result):
     f = y * result['collision']
     
     return int(y * result['collision'])
+
+def chen(result):
+    l = result['empty'] + result['success'] + result['collision']
+    n = result['success'] + 2 * result['collision']
+    next = 0
+    previous = -1
+    while previous < next:
+        pe = (1.0 - (1.0/l)) ** n
+        ps = (n/l) * ((1.0 - (1.0/l)) ** (n - 1))
+        pc = 1.0 - pe - ps
+        previous = next
+        next = (factorial(l) / (factorial(result['empty']) * factorial(result['success']) * factorial(result['collision']))) * (pe ** result['empty']) * (ps ** result['success']) * (pc ** result['collision'])
+        n += 1
+    return n - 2
