@@ -66,9 +66,28 @@ def chen(result):
     previous = -1
     while previous < next:
         pe = (1.0 - (1.0/l)) ** n
-        ps = (n/l) * ((1.0 - (1.0/l)) ** (n - 1))
+        ps = (n/float(l)) * ((1.0 - (1.0/l)) ** (n - 1))
         pc = 1.0 - pe - ps
         previous = next
-        next = (factorial(l) / (factorial(result['empty']) * factorial(result['success']) * factorial(result['collision']))) * (pe ** result['empty']) * (ps ** result['success']) * (pc ** result['collision'])
+        next = le_fat(l, result['empty'], result['success'], result['collision']) * (pe ** result['empty']) * (ps ** result['success']) * (pc ** result['collision'])
+        
         n += 1
     return n - 2
+
+
+def le_fat(a, b, c, d):
+    res = 1.0
+    while a > 1:
+        res *= a
+        a -= 1
+        if b > 1:
+            res /= b
+            b -=1
+        if c > 1:
+            res /= c
+            c -=1
+
+        if d > 1:
+            res /= d
+            d -=1
+    return res
