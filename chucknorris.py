@@ -43,15 +43,15 @@ for rel in resultsEL:
 for rch in resultsCH:
     print (rch)
 
-giveMeTheGraphic([(x+1)*100 for x in range(10)], emptySlots, "Iteracoes", "Slots Vazios", 1)
-giveMeTheGraphic([(x+1)*100 for x in range(10)], emptySlots2, "Iteracoes", "Slots Vazios", 1)
-giveMeTheGraphic([(x+1)*100 for x in range(10)], emptySlots3, "Iteracoes", "Slots Vazios", 1)
-giveMeTheGraphic([(x+1)*100 for x in range(10)], colli, "Iteracoes", "Colisoes", 2)
-giveMeTheGraphic([(x+1)*100 for x in range(10)], colli2, "Iteracoes", "Colisoes", 2)
-giveMeTheGraphic([(x+1)*100 for x in range(10)], colli3, "Iteracoes", "Colisoes", 2)
-giveMeTheGraphic([(x+1)*100 for x in range(10)], totalSlots, "Iteracoes", "Total de Slots", 3)
-giveMeTheGraphic([(x+1)*100 for x in range(10)], totalSlots2, "Iteracoes", "Total de Slots", 3)
-giveMeTheGraphic([(x+1)*100 for x in range(10)], totalSlots3, "Iteracoes", "Total de Slots", 3)
+giveMeTheGraphic([(x+1)*100 for x in range(10)], emptySlots, "Iteracoes", "Slots Vazios", 1, "Lower Bound")
+giveMeTheGraphic([(x+1)*100 for x in range(10)], emptySlots2, "Iteracoes", "Slots Vazios", 1, "Eom Lee")
+giveMeTheGraphic([(x+1)*100 for x in range(10)], emptySlots3, "Iteracoes", "Slots Vazios", 1, "Chen")
+giveMeTheGraphic([(x+1)*100 for x in range(10)], colli, "Iteracoes", "Colisoes", 2, "Lower Bound")
+giveMeTheGraphic([(x+1)*100 for x in range(10)], colli2, "Iteracoes", "Colisoes", 2, "Eom Lee")
+giveMeTheGraphic([(x+1)*100 for x in range(10)], colli3, "Iteracoes", "Colisoes", 2, "Chen")
+giveMeTheGraphic([(x+1)*100 for x in range(10)], totalSlots, "Iteracoes", "Total de Slots", 3, "Lower Bound")
+giveMeTheGraphic([(x+1)*100 for x in range(10)], totalSlots2, "Iteracoes", "Total de Slots", 3, "Eom Lee")
+giveMeTheGraphic([(x+1)*100 for x in range(10)], totalSlots3, "Iteracoes", "Total de Slots", 3, "Chen")
 
 show()
 print "Acabou."
