@@ -2,6 +2,8 @@ from Result import Result
 from random import randint
 from math import exp
 
+from scipy.misc import factorial
+
 def aloha(func):
     rand = lambda x: randint(0,x)
     results = []
@@ -29,6 +31,9 @@ def aloha(func):
 	            result.numCollision = result.numCollision + numCollision
 	            result.numEmpty = result.numEmpty + numEmpty;
 	            numTagsCount = numTagsCount - numSuccess;
+	            
+	            total = numCollision + numSuccess + numEmpty
+	            
 	            numSlots = func({'collision' : numCollision, 'empty' : numEmpty, 'success' : numSuccess})
 	        resultTotal.add(result)
         results.append(resultTotal/1000)
@@ -45,8 +50,44 @@ def eomLee(result):
     l = result['collision'] + result['success'] + result['empty']
     while True:
     	b = l/(result['collision']*y + result['success'])
-    	ny = (1 - exp( -1 / b)) / b*(1 - (1 + 1/b)*exp(-1/b))
-    	if(abs(ny - y) > t):
+    	ny = (1 - exp( -1 / b)) / (b*(1 - (1 + 1/b)*exp(-1/b)))
+    	if(abs(y - ny) < t):
     		break
     	y = ny
+    
+    f = y * result['collision']
+    
     return int(y * result['collision'])
+
+def chen(result):
+    l = result['empty'] + result['success'] + result['collision']
+    n = result['success'] + 2 * result['collision']
+    next = 0
+    previous = -1
+    while previous < next:
+        pe = (1.0 - (1.0/l)) ** n
+        ps = (n/float(l)) * ((1.0 - (1.0/l)) ** (n - 1))
+        pc = 1.0 - pe - ps
+        previous = next
+        next = le_fat(l, result['empty'], result['success'], result['collision']) * (pe ** result['empty']) * (ps ** result['success']) * (pc ** result['collision'])
+        
+        n += 1
+    return n - 2
+
+
+def le_fat(a, b, c, d):
+    res = 1.0
+    while a > 1:
+        res *= a
+        a -= 1
+        if b > 1:
+            res /= b
+            b -=1
+        if c > 1:
+            res /= c
+            c -=1
+
+        if d > 1:
+            res /= d
+            d -=1
+    return res
