@@ -2,8 +2,8 @@ import os, random
 
 def generator():
     
-    if not os.path.exists("data"):
-            os.makedirs("data")
+    if not os.path.exists("data128"):
+            os.makedirs("data128")
     for numTags in [(x+1)*100 for x in range(10)]:
         lblFolder = "data/"+str(numTags)
         if not os.path.exists(lblFolder):
@@ -23,7 +23,7 @@ def generator():
         
 def createTag():
     rand = lambda: random.choice(['0','1']) 
-    tagSize = 96
+    tagSize = 128
     tag = ''
     for i in range(tagSize):
         tag = tag + rand()
