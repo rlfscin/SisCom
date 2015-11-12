@@ -5,7 +5,7 @@ def generator():
     if not os.path.exists("data128"):
             os.makedirs("data128")
     for numTags in [(x+1)*100 for x in range(10)]:
-        lblFolder = "data/"+str(numTags)
+        lblFolder = "data128/"+str(numTags)
         if not os.path.exists(lblFolder):
             os.makedirs(lblFolder)
         for lblFile in range(1000):

@@ -6,9 +6,11 @@ def qt(tags):
 
     bits_reader = 0
     bits_tags = 0
+    step_count = 0
     
     while len(queue) > 0:
         prefix = queue.pop(0)
+        step_count += 1
     
         found_tag = None
         
@@ -23,5 +25,5 @@ def qt(tags):
         elif len(found_tags) > 1:
             queue.append(prefix + '0')
             queue.append(prefix + '1')
-    return {"bits_reader": bits_reader, "bits_tags": bits_tags}
+    return {"bits_reader": bits_reader, "bits_tags": bits_tags, "step_count": step_count}
         

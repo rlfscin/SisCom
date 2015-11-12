@@ -19,9 +19,10 @@ class TagsList:
     
     def run_algorithm(self, algorithm):
         for directory in self.directories:
-            print directory
+            print  "Running for %s tags..." % directory
             total_bits_reader = 0
             total_bits_tags = 0
+            total_step_count = 0
             
             files = self.generate_files_list(directory)
             
@@ -31,10 +32,13 @@ class TagsList:
                 bits = algorithm(tags)
                 total_bits_reader += bits['bits_reader']
                 total_bits_tags += bits['bits_tags']
+                total_step_count += bits['step_count']
             
             average_bits_reader = float(total_bits_reader) / len(files)
             average_bits_tags = float(total_bits_tags) / len(files)
-            print "%s tags - %f | %f" % (directory, average_bits_reader, average_bits_tags)
+            average_step_count = float(total_step_count) / len(files)
+            
+            print "Finished running for %s tags - transfered avg %f bits per tag and avg %f bits per tag in avg %f steps" % (directory, average_bits_reader, average_bits_tags/int(directory), average_step_count)
     
     def atoi(self, text):
         return int(text) if text.isdigit() else text
@@ -44,5 +48,9 @@ class TagsList:
 
 from qt import *
 from qwt import *
-tl = TagsList('./data')
+tl = TagsList('./data128')
+print "RUNNING QT"
+tl.run_algorithm(qt)
+
+print "\n\nRUNNING QwT"
 tl.run_algorithm(qwt)
