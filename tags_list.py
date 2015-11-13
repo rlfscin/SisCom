@@ -1,5 +1,11 @@
+from graphics import giveMeTheGraphic
+from matplotlib.pyplot import show
 import os
 import re
+
+bits_reader = []
+bits_tags = []
+steps = []
 
 class TagsList:
     
@@ -36,9 +42,15 @@ class TagsList:
             
             average_bits_reader = float(total_bits_reader) / len(files)
             average_bits_tags = float(total_bits_tags) / len(files)
+
             average_step_count = float(total_step_count) / len(files)
             
             print "Finished running for %s tags - transfered avg %f bits per tag and avg %f bits per tag in avg %f steps" % (directory, average_bits_reader, average_bits_tags/int(directory), average_step_count)
+
+            
+            steps.append(average_step_count)
+            bits_reader.append(average_bits_reader)
+            bits_tags.append(average_bits_tags)
     
     def atoi(self, text):
         return int(text) if text.isdigit() else text
@@ -46,11 +58,20 @@ class TagsList:
     def natural_keys(self, text):
        return [ self.atoi(c) for c in re.split('(\d+)', text) ]
 
+    def plot_graphs(self):
+        giveMeTheGraphic([(x+1)*100 for x in range(10)], bits_reader, "Etiquetas", "Media de Bits pelo Reader", 1, "Reader")
+        giveMeTheGraphic([(x+1)*100 for x in range(10)], bits_tags, "Etiquetas", "Media de Bits por Tag", 1, "Tags")
+        giveMeTheGraphic([(x+1)*100 for x in range(10)], steps, "Etiquetas", "Numero de Passos", 2, "Steps")
+
 from qt import *
 from qwt import *
+
 tl = TagsList('./data128')
 print "RUNNING QT"
 tl.run_algorithm(qt)
 
 print "\n\nRUNNING QwT"
 tl.run_algorithm(qwt)
+
+tl.plot_graphs()
+show()

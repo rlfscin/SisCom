@@ -13,7 +13,6 @@ def qwt(tags):
         return int(k * (1.0 - exp(-beta * L)))
         
     bits_reader = 0
-    bits_tags = 0
     step_count = 0
     memory = []
     
