@@ -14,6 +14,7 @@ def qwt(tags):
         
     bits_reader = 0
     bits_tags = 0
+    steps = 0
     memory = []
     
     stack = ['1', '0']
@@ -35,6 +36,7 @@ def qwt(tags):
         last_t = t
         
         prefix = stack.pop()
+        steps += 1
         L = len(prefix)
         
         bits_reader += L + ws_lenght
@@ -60,5 +62,5 @@ def qwt(tags):
             memory.append(found_tags[0])
             pass
 
-    return {"bits_reader": bits_reader, "bits_tags": bits_tags}
+    return {"bits_reader": bits_reader, "bits_tags": bits_tags, "steps": steps}
     

@@ -5,6 +5,7 @@ import re
 
 bits_reader = []
 bits_tags = []
+steps = []
 
 class TagsList:
     
@@ -39,6 +40,8 @@ class TagsList:
             
             average_bits_reader = float(total_bits_reader) / len(files)
             average_bits_tags = float(total_bits_tags) / len(files)
+            
+            steps.append(float(bits['steps']))
             bits_reader.append(average_bits_reader)
             bits_tags.append(average_bits_tags)
             # print "%s tags - %f | %f" % (directory, average_bits_reader, average_bits_tags)
@@ -51,8 +54,9 @@ class TagsList:
        return [ self.atoi(c) for c in re.split('(\d+)', text) ]
 
     def plot_graphs(self):
-        giveMeTheGraphic([(x+1)*100 for x in range(10)], bits_reader, "Iteracoes", "Media de Bits pelo Reader", 1, "Reader")
-        giveMeTheGraphic([(x+1)*100 for x in range(10)], bits_tags, "Iteracoes", "Media de Bits por Tag", 1, "Tags")
+        giveMeTheGraphic([(x+1)*100 for x in range(10)], bits_reader, "Etiquetas", "Media de Bits pelo Reader", 1, "Reader")
+        giveMeTheGraphic([(x+1)*100 for x in range(10)], bits_tags, "Etiquetas", "Media de Bits por Tag", 1, "Tags")
+        giveMeTheGraphic([(x+1)*100 for x in range(10)], steps, "Etiquetas", "Numero de Passos", 2, "Steps")
 
 from qt import *
 from qwt import *
