@@ -1,5 +1,10 @@
+from graphics import giveMeTheGraphic
+from matplotlib.pyplot import show
 import os
 import re
+
+bits_reader = []
+bits_tags = []
 
 class TagsList:
     
@@ -34,7 +39,10 @@ class TagsList:
             
             average_bits_reader = float(total_bits_reader) / len(files)
             average_bits_tags = float(total_bits_tags) / len(files)
-            print "%s tags - %f | %f" % (directory, average_bits_reader, average_bits_tags)
+            bits_reader.append(average_bits_reader)
+            bits_tags.append(average_bits_tags)
+            # print "%s tags - %f | %f" % (directory, average_bits_reader, average_bits_tags)
+
     
     def atoi(self, text):
         return int(text) if text.isdigit() else text
@@ -42,7 +50,13 @@ class TagsList:
     def natural_keys(self, text):
        return [ self.atoi(c) for c in re.split('(\d+)', text) ]
 
+    def plot_graphs(self):
+        giveMeTheGraphic([(x+1)*100 for x in range(10)], bits_reader, "Iteracoes", "Media de Bits pelo Reader", 1, "Reader")
+        giveMeTheGraphic([(x+1)*100 for x in range(10)], bits_tags, "Iteracoes", "Media de Bits por Tag", 1, "Tags")
+
 from qt import *
 from qwt import *
 tl = TagsList('./data')
 tl.run_algorithm(qwt)
+tl.plot_graphs()
+show()
