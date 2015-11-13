@@ -50,7 +50,7 @@ class TagsList:
             
             self.steps.append(average_step_count)
             self.bits_reader.append(average_bits_reader)
-            self.bits_tags.append(average_bits_tags)
+            self.bits_tags.append(average_bits_tags/int(directory))
     
     def atoi(self, text):
         return int(text) if text.isdigit() else text
