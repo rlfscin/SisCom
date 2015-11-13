@@ -1,6 +1,18 @@
-# SisCom
+# SisCom - DFSA e QT/QwT
 
-Link para setar algo em graphics.py
-https://donald.catalao.ufg.br/up/633/o/introducaoAosGraficos.pdf 
+## Equipe
+Alexandre, Erick, Isabelly, Pedro Henrique[s], Rubens.
 
-Link do cloud9: https://ide.c9.io/pedrodiniz/siscom
+## Como executar
+
+Para gerar os dados e visualizar os gráficos do DFSA, rode:
+
+```
+python chucknorris.py
+```
+
+Para gerar os dados e visualizar os gráficos do QT e QwT, rode:
+
+```
+python tags_list.py
+```
